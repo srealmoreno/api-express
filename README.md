@@ -23,7 +23,7 @@ Por razones de entendimiento algunas cosas muy puntuales las dejaré en inglés 
     - [SQL Injection](#sql-injection)
   - [Json](#json)
     - [Estructura](#estructura-de-un-json)
-    - [JsonAPI](#jsonpi)
+    - [JsonAPI](#jsonapi)
 - [Dependencias](#dependencias)
   - [Instalación](#instalación-de-dependencias)
   - [Extensiones de vscode](#instalar-extensiones-en-vscode)
@@ -1363,7 +1363,8 @@ y por último <kbd>Ctrl</kbd> + <kbd>S</kbd> para guardar
 
 #### Crear solicitud DELETE
 
-Duplica el request **Obtener Usuarios** y cambiale el nombre a **Eliminar Usuario**
+Duplica el request **Obtener Usuarios** y cambiale el nombre a **Eliminar Usuario**  
+
 Para tener un orden arrastras el request con el mouse de la siguiente manera:
 
 ![Solicitud POST](assets/move_request.gif)
@@ -1517,6 +1518,6 @@ Este proyecto está bajo la Licencia GNU General Public License v3.0 - mira el a
 
 ---
 
-Redes de área extensa 2020 - Salvador real
+Programación en Android - Salvador real
 
 [![#](https://img.shields.io/github/followers/srealmoreno?label=Follow&style=social)](https://github.com/srealmoreno/)

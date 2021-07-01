@@ -7,23 +7,8 @@ Por razones de entendimiento algunas cosas muy puntuales las dejaré en inglés 
 
 ## Indíce
 
-- [Requisitos](#requisitos)
 - [Conocimientos preliminares](#conocimientos-preliminares)
-  - [Protocolo HTTP](#protocolo-http)
-    - [Tipos de mensaje](#tipos-de-mensaje-http)
-    - [Estructura de un mensaje](#estructura-de-un-mensaje-http)
-    - [Tipos de métodos](#tipos-de-métodos-http)
-    - [Códigos de estado](#códigos-de-estado-http)
-  - [JavaScript](#javascript)
-    - [Desestructuración](#desestructuración)
-    - [Funciones arrow](#funciones-arrow)
-    - [Añadir nuevo método a un objeto](#añadir-nuevo-método-a-un-objeto)
-  - [Mysql](#mysql)
-    - [Insert Set](#insert-set)
-    - [SQL Injection](#sql-injection)
-  - [Json](#json)
-    - [Estructura](#estructura-de-un-json)
-    - [JsonAPI](#jsonapi)
+- [Requisitos](#requisitos)
 - [Dependencias](#dependencias)
   - [Instalación](#instalación-de-dependencias)
   - [Extensiones de vscode](#instalar-extensiones-en-vscode)
@@ -44,7 +29,7 @@ Por razones de entendimiento algunas cosas muy puntuales las dejaré en inglés 
     - [PUT](#get)
     - [DELETE](#delete)
   - [Poner en escucha el servidor](#6-poner-en-escucha-el-servidor)
-- [Código fuente completo](código-fuente-completo)
+- [Código fuente completo](#código-fuente-completo)
 - [Poner en marcha nuestro servidor](#poner-en-marcha-nuestro-servidor)
 - [Pruebas](#pruebas)
   - [Crear colección en Thunder Client](#crear-colección-en-thunder-client)
@@ -61,6 +46,21 @@ Por razones de entendimiento algunas cosas muy puntuales las dejaré en inglés 
 
 ---
 
+## Conocimientos preliminares
+
+Necesitamos tener conocimientos acerca de algunos conceptos claves que utilizaremos en este proyecto:
+
+Si tienes conocimientos de estos temas, puedes omitir la lectura.
+
+- [Protocolo HTTP](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#protocolo-http)
+- [JavaScript](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#javascript)
+- [Mysql](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#mysql)
+- [Json](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#json)
+
+Puedes leerlos en la [WIKI](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares) del proyecto
+
+---
+
 ## Requisitos
 
 - Distribución Debian, Ubuntu o derivados
@@ -68,572 +68,6 @@ Por razones de entendimiento algunas cosas muy puntuales las dejaré en inglés 
 - Conocimientos básicos HTTP/1.1
 - Conocimientos básicos de JavaScript (EcmaScript 6)
 - Visual studio code
-
----
-
-## Conocimientos preliminares
-
-TL;DR
-
-Antes de empezar necesitamos tener conocimiento acerca de algunos conceptos claves
-
----
-
-### Protocolo HTTP
-
-HTTP, de sus siglas en inglés: "Hypertext Transfer Protocol", es el nombre de un protocolo el cual nos permite realizar una petición de datos y recursos, como pueden ser documentos HTML. Es la base de cualquier intercambio de datos en la Web, y un protocolo de estructura cliente-servidor, esto quiere decir que una petición de datos es iniciada por el elemento que recibirá los datos (el cliente)
-
----
-
-#### Tipos de mensaje HTTP
-
-1. **request** (solicitud en español) es el mensaje que envía el **_cliente_**
-2. **response** (respuesta en español) es el mensaje que envía el **_servidor_**
-
-A menudo veremos estos mensajes abreviados como **req** y **res** respectivamente
-
-![Tipos de mensajes http](assets/http_messages.png)
-
----
-
-#### Estructura de un mensaje HTTP
-
-##### HTTP **request**
-
-Los elementos principales de un mensaje HTTP **request** son
-
-- HTTP HEADER
-  - METHOD
-  - URI
-- HTTP BODY
-  - DATA
-
-**Method**: (Método en español) Indica la acción que se desea realizar para un recurso determinado (lo veremos detalladamente en el siguiente punto). e.j _GET_
-
-**URI**: (Identificador Uniforme de Recursos de sus siglas en inglés: Uniform Resource Identifier) es una cadena que se refiere a un recurso. Los más comunes son URLs, que identifican el recurso dando su ubicación en la Web. e.j /_api/usuarios_
-
-**DATA**: (Datos en español) como su nombre lo indica, generalmente los datos enviados se codifican en HTTP BODY, si no hay ningún dato que enviar, es omitido. e.j cuando se envía un formulario HTML POST
-
-##### HTTP **response**
-
-Los elementos principales de un mensaje HTTP **response** son
-
-- HTTP HEADER
-  - STATUS CODE
-  - CONTENT TYPE
-- HTTP BODY
-  - DATA
-
-**STATUS CODE**: (Código de estado en español) Indica si se ha completado satisfactoriamente una solicitud (lo veremos detalladamente en el siguiente punto). e.j 200
-
-**CONTENT TYPE**: (Tipo de contenido) Indica el tipo de contenido y codificación que esta enviando el servidor, e.j _text/html; charset=utf8_ indica que es una página web
-
-**DATA**: Son los datos con los que responde el servidor, e.j una página web codificada en _UTF-8_
-
-![Estructura http](assets/http_structure.png)
-
-En esta imagen podemos observar que la estructura de los mensajes es la siguiente:
-
-**request**:
-
-- HTTP HEADER
-  - METHOD = GET
-  - URI = /home.html
-
-**response**:
-
-- HTTP HEADER
-  - STATUS CODE = 200
-  - CONTENT TYPE = text/html
-- HTTP BODY
-  - DATA = \<html>....\</html>
-
----
-
-#### Tipos de métodos HTTP
-
-El tipo de método determinará la acción o la operación CRUD que debemos hacer.
-
-| Método     | Operación SQL | Descripción      |
-| ---------- | ------------- | ---------------- |
-| **GET**    | SELECT        | Leer datos       |
-| **POST**   | INSERT        | Guardar datos    |
-| **PUT**    | UPDATE        | Actualizar datos |
-| **DELETE** | DELETE        | Eliminar datos   |
-
----
-
-#### Códigos de estado HTTP
-
-Todo mensaje **response** debe de llevar un código de estado que describa el resultado de la solicitud.
-
-- Respuestas informativas (100–199)
-- Respuestas satisfactorias (200–299)
-- Redirecciones (300–399)
-- Errores de los clientes (400–499)
-- y errores de los servidores (500–599)
-
-En este tutorial solo utilizaremos los siguientes
-
-| Código | Nombre                | Descripción                               |
-| ------ | --------------------- | ----------------------------------------- |
-| 200    | Ok                    | La solicitud tuvo éxito                   |
-| 400    | Bad Request           | La solicitud es incorrecta                |
-| 404    | Not Found             | El recurso solicitado no existe           |
-| 409    | Conflict              | Hay un conflicto al procesar la solicitud |
-| 500    | Internal Server Error | Error interno en el servidor              |
-
----
-
-### JavaScript
-
-#### Desestructuración
-
-La desestructuración es una característica muy conveniente al desarrollar con javascript, es una expresión que nos permite desempaquetar valores de arrays <kbd>[]</kbd> u objetos <kbd>{}</kbd> en grupos de variables, permitiéndonos simplificar y crear código más legible.
-
-Ejemplo 1: No utilizando desestructuración de objetos <kbd>{}</kbd>
-
-```javascript
-var usuario = {
-  nombre: "Salvador",
-  edad: 22,
-}
-
-// Debemos acceder a una propiedad por un '.' y el nombre de la propiedad
-var nombre = usuario.nombre 
-var edad = usuario.edad
-console.log(nombre, edad) // Salvador 22
-```
-
-Ejemplo 1: Utilizando desestructuración de objetos <kbd>{}</kbd>
-
-Utilizando desestructuración para el anterior bloque de código sería:
-
-```javascript
-var usuario = {
-  nombre: "Salvador",
-  edad: 22,
-}
-
-// Las propiedades usuario.nombre y usuario.edad se asignan a las variables correspondientes sin importar su orden
-// Debemos acceder a una propiedad por su nombre
-var { nombre, edad } = usuario 
-
-console.log(nombre, edad) // Salvador 22
-```
-
-Es importante escribir el nombre de la propiedad correctamente respetando las mayúsculas y minúsculas.
-
-```javascript
-var usuario = {
-  nombre: "Salvador",
-  edad: 22,
-}
-
-var { Nombre } = usuario
-
-console.log(Nombre) // undefined ya que la propiedad es 'nombre' en minúscula
-```
-
-Ejemplo 2: No utilizando desestructuración de array's <kbd>[]</kbd>
-
-```javascript
-var usuario1 = {
-  nombre: "Salvador",
-  edad: 22,
-}
-
-var usuario2 = {
-  nombre: "Lester",
-  edad: 24,
-}
-
-var usuario3 = {
-  nombre: "Omar",
-  edad: 30,
-}
-
-var usuarios = [usuario1, usuario2, usuario3]
-
-var u1 = usuarios[0]
-var u3 = usuarios[2]
-
-console.log(u1.nombre) // Salvador
-console.log(u3.nombre) // Omar
-```
-
-Ejemplo 2: Utilizando desestructuración de array's <kbd>[]</kbd>
-
-Utilizando desestructuración para el anterior bloque de código sería:
-
-```javascript
-var usuario1 = {
-  nombre: "Salvador",
-  edad: 22,
-}
-
-var usuario2 = {
-  nombre: "Lester",
-  edad: 24,
-}
-
-var usuario3 = {
-  nombre: "Omar",
-  edad: 30,
-}
-
-var usuarios = [usuario1, usuario2, usuario3]
-
-// Los objetos se asignarán utilizando marcadores ',' de posición, aquí si importa el orden.
-var [u1, , u3] = usuarios //Como puede observar para omitir un dato simplemente se escribe una ','
-
-console.log(u1.nombre) // Salvador
-console.log(u3.nombre) // Omar
-```
-
-Puede omitir asignación a una variable hacia la derecha, pero no hacia la izquierda ya que se utiliza un marcador de posición <kbd>,</kbd>
-
-```javascript
-var usuario1 = {
-  nombre: "Salvador",
-  edad: 22,
-}
-
-var usuario2 = {
-  nombre: "Lester",
-  edad: 24,
-}
-
-var usuario3 = {
-  nombre: "Omar",
-  edad: 30,
-}
-
-var usuarios = [usuario1, usuario2, usuario3]
-
-var [u1] = usuarios
-
-console.log(u1.nombre) // Salvador
-
-var [u3] = usuarios // No se utiliza el marcador de posición
-
-console.log(u3.nombre) // Salvador, Debería ser Omar!
-
-var [, , u3] = usuarios // Se utiliza el marcador de posición
-
-console.log(u3.nombre) // Omar
-```
-
----
-
-#### Funciones arrow
-
-Con EcmaScript podemos declarar métodos con menos código, utilizando funciones arrow (flecha en inglés ya que su operador es **=>**). e.j
-
-```javascript
-var hola = function (nombre) {
-  console.log(`Hola ${nombre}!`)
-}
-
-var hola = (nombre) => {
-  console.log(`Hola ${nombre}!`)
-}
-
-// Si la función solo ejecuta una instrucción podemos omitir las llaves
-var hola = (nombre) => console.log(`Hola ${nombre}!`)
-
-// Si la función solo recibe un parámetro podemos omitir los paréntesis
-var hola = nombre => console.log(`Hola ${nombre}!`)
-```
-
-Un dato importante sobre las funciones arrow es que no tienen la referencia this, esto será muy importante para el siguiente punto.
-
----
-
-#### Añadir nuevo método a un objeto
-
-_Monkey patching_ es una técnica para agregar, modificar o suprimir el comportamiento predeterminado de un fragmento de código en tiempo de ejecución sin cambiar su código fuente original. Esto es similar a [funciones de extension en kotlin](https://devexperto.com/funciones-extension-kotlin-android/)
-
-Siguiendo el ejemplo de nuestra función anterior, debíamos de pasar por parámetro un nombre para imprimirlo:
-
-```javascript
-var hola = function (nombre) {
-  console.log(`Hola ${nombre}!`)
-}
-
-var nombre = "Salvador"
-
-hola(nombre) // Hola Salvador!
-```
-
-Sería más simple si podemos definir un nuevo método para los **strings** que haga lo mismo.
-Para eso debemos definirlo de la siguiente manera:
-
-```javascript
-tipo_de_dato.prototype.nombre_funcion = function () {
-  ...
-}
-```
-
-```javascript
-String.prototype.hola = function () {
-  console.log(`Hola ${this}!`)
-}
-// Ahora cualquier string tendrá el método "hola"
-// y podremos ahorrar pasar la string como parámetro del método
-
-var nombre = "Salvador"
-
-nombre.hola() //Hola Salador!
-```
-
-Si tenemos un objeto de **clave**<kbd>:</kbd>**valor** la palabra reservada **prototype** es omitida, en este caso el tipo de dato es **persona**
-
-```javascript
-var persona = {
-  nombre: "Salvador",
-}
-
-persona.hola = function () {
-  console.log(`Hola ${this.nombre}!`)
-}
-
-persona.hola() //Hola Salador!
-```
-
----
-
-### Mysql
-
-#### INSERT SET
-
-Probablemente la sintaxis que utilizas para insertar datos en una tabla es la siguiente:
-
-```sql
-INSERT INTO usuarios (nombre, apellido, correo) VALUES ("Salvador", "Real","salvador@ejemplo.com")
-```
-
-En este tutorial utilizaremos con **SET**
-
-```sql
-INSERT INTO usuarios SET nombre="Salvador", apellido="Real", correo="salvador@ejemplo.com"
-```
-
-Dado que cuando se envían datos a tráves del protocolo HTTP, se [codifica](#http-request) como **clave**=**valor** y **express** nos devolverá respetando esa sintaxis
-
-![Codificación de formulario](assets/form_data.png)
-
-Si estamos seguros de recibir los campos correctamente (cantidad de los campos) podemos utilizar la siguiente sintaxis
-
-```javascript
-app.use(urlencoded({ extended: false }))
-
-// Obtenemos la misma consulta de arriba
-query("INSERT INTO usuarios SET ?", [req.body])
-// Pero si nos envían un dato que no esperamos recibir, obtendremos una excepción
-// e.j Si nos envían:
-// "nombre"  : "Salvador"
-// "apellido": "Real"
-// "correo"  : "salvador@ejemplo.com"
-// "edad"    : 22
-// "edad" no es una atributo/columna de nuestra base de datos.
-// se ejecutaría la siguiente consulta:
-//  INSERT INTO usuarios SET nombre="Salvador", apellido="Real", correo="salvador@ejemplo.com", edad=22
-//  Obtendremos la siguiente excepción: "Unknown column 'edad' in 'field list'"
-```
-
-Si **no** estamos seguros de recibir los campos correctamente podemos utilizar la siguiente sintaxis
-
-```javascript
-app.use(urlencoded({ extended: false }))
-
-const { nombre, apellido, correo } = req.body
-
-// De esta manera solo introduciremos los datos específicos
-query("INSERT INTO usuarios SET nombre = ?, apellido = ?, correo = ?", [
-  nombre,
-  apellido,
-  correo,
-])
-```
-
-Si no entiendes que significa **'?'** lee el siguiente punto.
-
----
-
-#### SQL Injection
-
-La inyección de SQL es un tipo de ciberataque en el cual un usuario malicioso inserta o "inyecta" código SQL invasor dentro del código SQL programado, con el fin de quebrantar las medidas de seguridad y acceder a datos protegidos.
-
-Por ejemplo tenemos la siguiente consulta SQL elimina un usuario por un ID
-
-```javascript
-query("DELETE FROM usuarios WHERE id=" + req.body.id)
-```
-
-Ejecutar la consulta de esa manera tiene un gran problema ya que la variable **id** puede tener cualquier valor que es enviado por un usuario. e.j
-
-¿Que pasaría si la variable **id** tuviese el valor "**1**"?
-
-Esta es la consulta que se ejecutaría en la base de datos
-
-```sql
-DELETE FROM usuarios WHERE id=1
--- Solo se eliminaría el usuario con id igual a 1
--- Nuestra consulta funciona perfectamente como lo esperado
-```
-
-¿Que pasaría si la variable **id** tuviese el valor "**1 or 1 = 1**"?
-
-Esta es la consulta que se ejecutaría en la base de datos
-
-```sql
-DELETE FROM usuarios WHERE id=1 or 1 = 1
--- Se inyectó el código 'or 1 = 1'
--- ya que es un or y "1 = 1" siempre es True
--- Se eliminarían todos los registros de la tabla usuario
--- Nuestra consulta no funciona como lo esperado, debído a un comportamiento
--- malintencionado
-```
-
-La solución es sencilla. Debemos modificar el código para que cualquier entrada del usuario se escape automáticamente antes de ejecutarse.
-
-Tiene dos opciones para solucionar este problema:
-
-- Marcadores de posición **"?"**
-
-Puede asignar valores en la matriz a marcadores de posición (los signos de interrogación) en el mismo orden en que se pasan.
-
-```javascript
-query("DELETE FROM usuarios WHERE id = ?", [req.body.id])
-
-//Por ejemplo que elimine si el id y el nombre concuerdan
-query("DELETE FROM usuarios WHERE id = ? AND nombre = ?", [
-  req.body.id,
-  req.body.nombre,
-])
-```
-
-- Marcadores de posición con nombre
-
-Esto es casi idéntico al ejemplo anterior, sin embargo, los nombres de los atributos dentro del objeto se convierten en marcadores de posición en la consulta SQL.
-
-```javascript
-query("DELETE FROM usuarios WHERE id = :id", { id: req.body.id })
-
-//Por ejemplo que elimine si el id y el nombre concuerdan
-query("DELETE FROM usuarios WHERE id = :id AND nombre = :nombre", {
-  id: req.body.id,
-  nombre: req.body.nombre,
-})
-```
-
----
-
-### Json
-
-(JavaScript Object Notation - Notación de Objetos de JavaScript) es un formato ligero de intercambio de datos. Leerlo y escribirlo es simple para humanos, mientras que para las máquinas es simple interpretarlo y generarlo.
-
----
-
-#### Estructura de un Json
-
-JSON está constituído por dos estructuras:
-
-1. Una colección de pares de nombre/valor. En varios lenguajes esto es conocido como un objeto, registro estructura, diccionario, tabla hash, lista de claves o un arreglo asociativo.
-
-2. Una lista ordenada de valores. En la mayoría de los lenguajes, esto se implementa como arreglos, vectores, listas o sequencias.
-
-Estas son estructuras universales virtualmente todos los lenguajes de programación las soportan de una forma u otra. Es razonable que un formato de intercambio de datos que es independiente del lenguaje de programación se base en estas estructuras.
-
-En JSON, se presentan de estas formas:
-
-Un objeto comienza con <kbd>{</kbd> y termina con <kbd>}</kbd>. Cada nombre es seguido por <kbd>:</kbd> y los pares nombre/valor están separados por <kbd>,</kbd>
-
-Un valor puede ser una cadena de caracteres con comillas dobles, o un número, o true o false o null, o un objeto o un arreglo.
-
-```json
-{
-  "nombre": "Salvador",
-  "apellido": "Real",
-  "edad": 22,
-  "correo": null,
-  "vivo": true
-}
-```
-
-Un arreglo comienza con <kbd>[</kbd> y termina con <kbd>]</kbd> Los valores se separan por <kbd>,</kbd>
-
-```json
-[
-  {
-    "nombre": "Salvador",
-    "apellido": "Real",
-    "edad": 22
-  },
-  {
-    "nombre": "Lester",
-    "apellido": "Vega",
-    "edad": 23
-  },
-  {
-    "nombre": "Omar",
-    "apellido": "Rizo",
-    "edad": 30
-  }
-]
-```
-
----
-
-#### JsonApi
-
-Siguiendo el estandar de [JsonApi](https://jsonapi.org/) y tomando de ejemplo la api de [Facebook](https://developers.facebook.com/docs/graph-api/using-graph-api/error-handling/) nuestros mensajes tendrán 2 estructuras principales:
-
-- En caso de **éxito** el formato json será el siguiente
-
-```json
-{
-  "success": true,
-  "status": "success",
-  "data": [
-    {
-      ...
-    }
-  ]
-}
-```
-
-**success**: (éxito) es una variable Bolean que indicará si la transacción se ejecutó exitosamente
-
-**status**: (estado) es una variable String que indicará si la transacción se ejecutó exitosamente
-
-**data**: (datos) es un array de Objetos que contendrá los datos devueltos
-
-- En caso de **error** el formato json será el siguiente
-
-```json
-{
-  "success": false,
-  "status": "failed",
-  "error": {
-    "code": 404,
-    "message": "Not found"
-  }
-}
-```
-
-Para los mensajes de error podemos utilizar los [códigos de estado HTTP](#códigos-de-estado-http)
-
-**success**: (éxito) es una variable Bolean que indicará si la transacción se ejecutó exitosamente
-
-**status**: (estado) es una variable String que indicará si la transacción se ejecutó exitosamente
-
-**error**: es un objeto que contendrá el código y mensaje de error
-
-**code**: (código) es una variable numérica que indicará el código de error
-
-**message**:(mensaje) es una variable String que indicará en lenguaje natural la razón del error
 
 ---
 
@@ -863,8 +297,8 @@ module.exports = pool
 ```
 
 > Algunas dudas que quizás tengas:  
-> [¿Por qué las variables se declaran con <kbd>{}</kbd>?](#desestructuración)  
-> [¿Qué significa **pool.queryPromisify** en el código?](#añadir-nuevo-método-a-un-objeto)  
+> [¿Por qué las variables se declaran con <kbd>{}</kbd>?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#desestructuración)  
+> [¿Qué significa **pool.queryPromisify** en el código?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#añadir-nuevo-método-a-un-objeto)  
 > [¿Qué es **promisify** en Nodejs?](https://medium.com/@suyashmohan/util-promisify-in-node-js-v8-d07ef4ea8c53)  
 > [¿Cúal es la diferencia entre utilizar un pool y una conexión a la base de datos?](https://es.stackoverflow.com/questions/359715/cu%C3%A1l-ser%C3%ADa-la-diferencia-entre-usar-un-pool-o-usar-una-conexion-tradicional-a-l)
 
@@ -880,7 +314,7 @@ El archivo index.js es nuestro archivo principal, en este declaramos nuestra API
 
 - Importamos el módulo de express y [nuestro módulo](#módulo-de-mysql) de la conexión a la base de datos.  
 - Declaramos una dirección **IP** y un **Puerto** donde estará escuchando nuestra aplicación.  
-- Indicarle a express que decodifique los datos que nos envían a través de una [solicitud HTTP](#protocolo-http)
+- Indicarle a express que decodifique los datos que nos envían a través de una [solicitud HTTP](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#protocolo-http)
 
 Agrega el siguiente código al archivo **index.js**
 
@@ -898,16 +332,16 @@ app.use(json())
 ```
 
 > Algunas dudas que quizás tengas:  
-> [¿Por qué las variables se declaran con <kbd>{}</kbd>?](#desestructuración)  
-> [¿Que significa **urlencoded()** y **json()**?](#insert-set)
+> [¿Por qué las variables se declaran con <kbd>{}</kbd>?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#desestructuración)  
+> [¿Que significa **urlencoded()** y **json()**?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#insert-set)
 
 ---
 
 ### 2. Declaración de formato de mensajes de respuesta
 
-- Declaramos 2 [nuevos métodos](#añadir-nuevo-método-a-un-objeto) para los objetos de tipo **response** que enviarán un [JSON](#json) con la estructura de nuestros mensajes
+- Declaramos 2 [nuevos métodos](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#añadir-nuevo-método-a-un-objeto) para los objetos de tipo **response** que enviarán un [JSON](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#json) con la estructura de nuestros mensajes
 
-- Para el caso de [**éxito**](#jsonapi)
+- Para el caso de [**éxito**](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#jsonapi)
 
 Agrega el siguiente código al archivo **index.js**
 
@@ -925,7 +359,7 @@ express.response.sendMessage = function (data = undefined) {
 }
 ```
 
-- Para el caso de [**error**](#jsonapi)
+- Para el caso de [**error**](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#jsonapi)
 
 Agrega el siguiente código al archivo **index.js**
 
@@ -945,14 +379,14 @@ express.response.sendError = function (code, message) {
 ```
 
 > Algunas dudas que quizás tengas:  
-> [¿Que significa **response**?](#tipos-de-mensaje-http)  
-> [¿Que significa **status()**?](#códigos-de-estado-http)
+> [¿Que significa **response**?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-mensaje-http)  
+> [¿Que significa **status()**?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#códigos-de-estado-http)
 
 ---
 
 ### 3. Declaración de métodos de comprobación
 
-- Declaramos un [nuevo método](#añadir-nuevo-método-a-un-objeto) para los objetos de tipo **request** que comprobarán si los [datos](#http-request) que nos envían a través de un [POST](#tipos-de-métodos-http) o [PUT](#tipos-de-métodos-http) están vacíos
+- Declaramos un [nuevo método](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#añadir-nuevo-método-a-un-objeto) para los objetos de tipo **request** que comprobarán si los [datos](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#http-request) que nos envían a través de un [POST](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-métodos-http) o [PUT](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-métodos-http) están vacíos
 
 Agrega el siguiente código al archivo **index.js**
 
@@ -963,7 +397,7 @@ express.request.isBodyEmpty = function () {
 ```
 
 > Algunas dudas que quizás tengas:  
-> [¿Que significa **response**?](#tipos-de-mensaje-http)  
+> [¿Que significa **response**?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-mensaje-http)  
 
 ---
 
@@ -999,17 +433,17 @@ const mysqlErrors = {
 
 ### 5. Declaración de métodos HTTP en nuestro servidor
 
-Para declarar los [métodos HTTP](#tipos-de-métodos-http) debemos de especificarlo con un <kbd>.</kbd> seguido de el tipo de método.  
+Para declarar los [métodos HTTP](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-métodos-http) debemos de especificarlo con un <kbd>.</kbd> seguido de el tipo de método.  
 
-Cada [método HTTP](#tipos-de-métodos-http) debe de tener 2 argumentos:
+Cada [método HTTP](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-métodos-http) debe de tener 2 argumentos:
 
-1. **string**: Path [URI](#http-request)
-2. **método**: Manejador del método HTTP [arrow Functions](#funciones-arrow)
+1. **string**: Path [URI](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#http-request)
+2. **método**: Manejador del método HTTP [arrow Functions](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#funciones-arrow)
 
 Todo manejador (handler) recibirá por lo menos 2 argumentos:
 
-1. **req** Un Objeto de tipo _express.[request](#tipos-de-mensaje-http)_
-2. **res** Un Objeto de tipo _express.[request](#tipos-de-mensaje-http)_
+1. **req** Un Objeto de tipo _express.[request](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-mensaje-http)_
+2. **res** Un Objeto de tipo _express.[request](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-mensaje-http)_
 
 Para acceder a las variables de los Objetos tipo request tenemos 3 maneras diferentes.
 
@@ -1019,11 +453,11 @@ Para acceder a las variables de los Objetos tipo request tenemos 3 maneras difer
 | req.query.id  | Variable en la URL         | ANY         | /api/usuario?id=1                            |
 | req.params.id | Variable en la URI         | ANY         | /api/usuario/:id                             |
 
-Nuestra [URI](#http-request) será **"/api/usuarios"**
+Nuestra [URI](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#http-request) será **"/api/usuarios"**
 
 ---
 
-#### [GET](#tipos-de-métodos-http)
+#### [GET](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-métodos-http)
 
 Agrega el siguiente código al archivo **index.js**
 
@@ -1072,11 +506,11 @@ app.get("/api/usuarios/:id", async (req, res) => {
 > Algunas dudas que quizás tengas:  
 > [¿Que significa **res** y **req**?](#5-declaración-de-métodos-http-en-nuestro-servidor)  
 > [¿Qué significa **aync** y **await** en el código?](http://farzicoder.com/util-promisify-in-Node-js-v8/#Async-amp-Await)  
-> [¿Qué significa **?** y el array en la consulta?](#sql-injection)
+> [¿Qué significa **?** y el array en la consulta?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#sql-injection)
 
 ---
 
-#### [POST](#tipos-de-métodos-http)
+#### [POST](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-métodos-http)
 
 Agrega el siguiente código al archivo **index.js**
 
@@ -1110,12 +544,12 @@ Comprobamos si el error **existe** en nuestro objeto mysqlErrors. **Si existe**,
 > Algunas dudas que quizás tengas:  
 > [¿Que significa **res** y **req**?](#5-declaración-de-métodos-http-en-nuestro-servidor)  
 > [¿Qué significa **aync** y **await** en el código?](http://farzicoder.com/util-promisify-in-Node-js-v8/#Async-amp-Await)  
-> [¿Qué significa **SET** en la consulta?](#insert-set)  
-> [¿Qué significa **?** y el array en la consulta?](#sql-injection)
+> [¿Qué significa **SET** en la consulta?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#insert-set)  
+> [¿Qué significa **?** y el array en la consulta?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#sql-injection)
 
 ---
 
-#### [PUT](#tipos-de-métodos-http)
+#### [PUT](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-métodos-http)
 
 Agrega el siguiente código al archivo **index.js**
 
@@ -1158,14 +592,14 @@ Comprobamos si el error **existe** en nuestro objeto mysqlErrors. **Si existe**,
 
 > Algunas dudas que quizás tengas:  
 > [¿Que significa **res** y **req**?](#5-declaración-de-métodos-http-en-nuestro-servidor)  
-> [¿Por qué la variable **affectedRows** se declara entre <kbd>{}</kbd>?](#desestructuración)  
+> [¿Por qué la variable **affectedRows** se declara entre <kbd>{}</kbd>?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#desestructuración)  
 > [¿Qué significa **aync** y **await** en el código?](http://farzicoder.com/util-promisify-in-Node-js-v8/#Async-amp-Await)  
-> [¿Qué significa **SET** en la consulta?](#insert-set)  
-> [¿Qué significa **?** y el array en la consulta?](#sql-injection)
+> [¿Qué significa **SET** en la consulta?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#insert-set)  
+> [¿Qué significa **?** y el array en la consulta?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#sql-injection)
 
 ---
 
-#### [DELETE](#tipos-de-métodos-http)
+#### [DELETE](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-métodos-http)
 
 Agrega el siguiente código al archivo **index.js**
 
@@ -1199,10 +633,10 @@ Si esa variable es **igual a _0_**, quiere decir que **no existe** ningún regis
 
 > Algunas dudas que quizás tengas:  
 > [¿Que significa **res** y **req**?](#5-declaración-de-métodos-http-en-nuestro-servidor)  
-> [¿Por qué la variable **affectedRows** se declara entre <kbd>{}</kbd>?](#desestructuración)  
+> [¿Por qué la variable **affectedRows** se declara entre <kbd>{}</kbd>?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#desestructuración)  
 > [¿Qué significa **aync** y **await** en el código?](http://farzicoder.com/util-promisify-in-Node-js-v8/#Async-amp-Await)  
-> [¿Qué significa **SET** en la consulta?](#insert-set)  
-> [¿Qué significa **?** y el array en la consulta?](#sql-injection)
+> [¿Qué significa **SET** en la consulta?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#insert-set)  
+> [¿Qué significa **?** y el array en la consulta?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#sql-injection)
 
 ---
 
@@ -1303,9 +737,9 @@ y por último <kbd>Ctrl</kbd> + <kbd>S</kbd> para guardar
 ![Tests](assets/request_tests.gif)
 
 > Algunas dudas que quizás tengas:  
-> [¿Que es <kbd>ResponseCode</kbd>?](#http-response)  
-> [¿Que es <kbd>ContentType</kbd>?](#http-response)  
-> [¿Qué es json.success y json.status?](##2-declaración-de-formato-de-mensajes-de-respuesta)  
+> [¿Que es <kbd>ResponseCode</kbd>?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#http-response)  
+> [¿Que es <kbd>ContentType</kbd>?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#http-response)  
+> [¿Qué es json.success y json.status?](#2-declaración-de-formato-de-mensajes-de-respuesta)  
 
 ---
 

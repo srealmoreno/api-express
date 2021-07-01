@@ -1,0 +1,237 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Test node-api",
+    "dateExported": "2021-06-30T20:04:27.024Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "containerId": "",
+            "sortNum": 120000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.io)"
+                }
+            ],
+            "colId": "82308028-0bf1-4c4c-ae3a-611f98237e45",
+            "name": "Obtener Usuarios",
+            "url": "http://localhost:3000/api/usuarios",
+            "method": "GET",
+            "modified": "2021-06-30T20:03:03.222Z",
+            "created": "2021-06-30T06:01:08.652Z",
+            "_id": "bec51f2d-1cc8-4724-a361-8ddf62f528b2",
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json; charset=utf-8"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.success",
+                    "action": "equal",
+                    "value": "true"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.status",
+                    "action": "equal",
+                    "value": "success"
+                }
+            ]
+        },
+        {
+            "containerId": "",
+            "sortNum": 130000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.io)"
+                }
+            ],
+            "colId": "82308028-0bf1-4c4c-ae3a-611f98237e45",
+            "name": "Guardar Usuario",
+            "url": "http://localhost:3000/api/usuarios",
+            "method": "POST",
+            "modified": "2021-06-30T19:41:43.364Z",
+            "created": "2021-06-30T17:21:54.895Z",
+            "_id": "aaf54a2b-5af3-4395-90e2-8e31ffa05afc",
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "nombre",
+                        "value": "Salvador"
+                    },
+                    {
+                        "name": "apellido",
+                        "value": "Real"
+                    },
+                    {
+                        "name": "correo",
+                        "value": "salvador@ejemplo.com"
+                    }
+                ]
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json; charset=utf-8"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.success",
+                    "action": "equal",
+                    "value": "true"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.status",
+                    "action": "equal",
+                    "value": "success"
+                }
+            ]
+        },
+        {
+            "containerId": "",
+            "sortNum": 140000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.io)"
+                }
+            ],
+            "colId": "82308028-0bf1-4c4c-ae3a-611f98237e45",
+            "name": "Actualizar Usuario",
+            "url": "http://localhost:3000/api/usuarios/1",
+            "method": "PUT",
+            "modified": "2021-06-30T18:14:36.346Z",
+            "created": "2021-06-30T17:53:09.381Z",
+            "_id": "9e393820-3d4d-477e-9506-4ad5496144df",
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "nombre",
+                        "value": "Lester"
+                    },
+                    {
+                        "name": "apellido",
+                        "value": "Vega"
+                    },
+                    {
+                        "name": "correo",
+                        "value": "lester@ejemplo.com"
+                    }
+                ]
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json; charset=utf-8"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.success",
+                    "action": "equal",
+                    "value": "true"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.status",
+                    "action": "equal",
+                    "value": "success"
+                }
+            ]
+        },
+        {
+            "containerId": "",
+            "sortNum": 150000,
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.io)"
+                }
+            ],
+            "colId": "82308028-0bf1-4c4c-ae3a-611f98237e45",
+            "name": "Eliminar Usuario",
+            "url": "http://localhost:3000/api/usuarios/1",
+            "method": "DELETE",
+            "modified": "2021-06-30T19:27:49.108Z",
+            "created": "2021-06-30T18:16:52.730Z",
+            "_id": "a2f61b28-e8ac-4e16-af2a-000caf97a051",
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json; charset=utf-8"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.success",
+                    "action": "equal",
+                    "value": "true"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.status",
+                    "action": "equal",
+                    "value": "success"
+                }
+            ]
+        }
+    ]
+}

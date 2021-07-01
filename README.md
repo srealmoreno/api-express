@@ -13,7 +13,7 @@ Por razones de entendimiento algunas cosas muy puntuales las dejaré en inglés 
   - [Instalación](#instalación-de-dependencias)
   - [Extensiones de vscode](#instalar-extensiones-en-vscode)
 - [Iniciando el proyecto](#iniciando-el-proyecto)
-- [Mysql](#crear-conexión-mysql-en-vscode)
+- [Mysql](#mysql)
   - [Crear conexión mysql en vscode](#crear-conexión-mysql-en-vscode)
   - [Crear base de datos](#crear-base-de-datos-y-usuario-en-mysql)
   - [Ejecutar script sql](#ejecutar-script-sql)
@@ -163,7 +163,7 @@ En el apartado de [docker](#instalar-extensiones-en-vscode) (icono de la ballena
 
 ---
 
-## MYSQL
+## Mysql
 
 ### Crear conexión mysql en vscode
 
@@ -397,7 +397,7 @@ express.request.isBodyEmpty = function () {
 ```
 
 > Algunas dudas que quizás tengas:  
-> [¿Que significa **response**?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-mensaje-http)  
+> [¿Que significa **request**?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#tipos-de-mensaje-http)  
 
 ---
 

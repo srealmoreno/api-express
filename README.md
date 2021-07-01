@@ -1234,7 +1234,7 @@ En vscode vamos a presionar las teclas <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd
 Ejecutamos lo siguiente en la terminal:
 
 ```bash
-node start
+npm start
 ```
 
 ![Abrir terminal integrada](assets/open_integrated_terminal.gif)
@@ -1242,7 +1242,7 @@ node start
 Si deseamos que nuestro servidor se reinicie automáticamente cada vez que modifiquemos cualquier fichero del proyecto ejecutamos
 
 ```bash
-node run dev
+npm run dev
 ```
 
 Si podemos ver el texto 'Listening in [http://127.0.0.1:3000](##)' quiere decir que nuestro servidor inició correctamente.

@@ -1,0 +1,19 @@
+{
+	"name": "node",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"dev": "nodemon node index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "Salvador Real",
+	"license": "GPLv3",
+	"description": "Example api with express, mysql and Docker",
+	"devDependencies": {
+		"express": "^4.17.1",
+		"mysql": "^2.18.1",
+		"nodemon": "^2.0.7"
+	}
+}

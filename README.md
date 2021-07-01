@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/%20-api-pink) ![](https://img.shields.io/badge/%20-Node-grey) ![](https://img.shields.io/badge/%20-Docker-blue) ![](https://img.shields.io/badge/%20-Express-green) ![](https://img.shields.io/badge/%20-Mysql-lightblue) ![](https://img.shields.io/badge/Tutoriales-Srealmoreno-red?style=flat&logo=github)
+![#](https://img.shields.io/badge/%20-api-pink) ![#](https://img.shields.io/badge/%20-Node-grey) ![#](https://img.shields.io/badge/%20-Docker-blue) ![#](https://img.shields.io/badge/%20-Express-green) ![#](https://img.shields.io/badge/%20-Mysql-lightblue) ![#](https://img.shields.io/badge/Tutoriales-Srealmoreno-red?style=flat&logo=github)
 
 # Crear una api utilizando express y mysql sobre docker
 
@@ -693,7 +693,7 @@ npm install -D
 Luego sigue solamente estos pasos:
 
 - [Crear conexión mysql en vscode](#crear-conexión-mysql-en-vscode)
-- [Ejecutar script.sql](#ejecutar-scriptsql)
+- [Ejecutar script sql](#ejecutar-script-sql)
 - [Poner en marcha nuestro servidor](#poner-en-marcha-nuestro-servidor)
 - [Importar Tests Thunder en vscode](#colección-completa-de-thunder-client) (puedes encontrar el archivo en '**tests/thunder_test.json**')
 - [Ejecución de Test](#ejecución-de-pruebas)
@@ -1513,6 +1513,10 @@ También puedes mirar la lista de todos los [contribuyentes](https://github.com/
 
 ## Licencia
 
-Este proyecto está bajo la Licencia GNU General Public License v3.0 - mira el archivo [LICENSE.md](LICENSE.md) para más detalles
+Este proyecto está bajo la Licencia GNU General Public License v3.0 - mira el archivo [LICENSE](LICENSE) para más detalles
 
 ---
+
+Redes de área extensa 2020 - Salvador real
+
+[![#](https://img.shields.io/github/followers/srealmoreno?label=Follow&style=social)](https://github.com/srealmoreno/)

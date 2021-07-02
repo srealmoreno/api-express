@@ -85,7 +85,7 @@ import_mysql_image(){
 	info "Importando imagen mysql"
 	local IMAGE_ID=$(docker image list --filter=reference=mysql:$IMAGE_VERSION --quiet)
 	if [ "$IMAGE_ID" == ""  ]; then
-		docker pull mysql:$VERSION && success "Imagen importada" || failed "Imagen no importada"
+		docker pull mysql:$IMAGE_VERSION && success "Imagen importada" || failed "Imagen no importada"
 	else
 		success "Imagen ya se encuentra importada: mysql:$IMAGE_VERSION id=$IMAGE_ID"
 	fi

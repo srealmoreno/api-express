@@ -77,11 +77,11 @@ app.get("/api/usuarios/:id", async (req, res) => {
     console.log("Obtener usuario por id " + req.params.id)
 
     try {
-        const usuario = await database.queryPromisify(
+        const [usuario] = await database.queryPromisify(
             "SELECT * FROM usuarios WHERE id = ?", [req.params.id]
         )
 
-        if (usuario.length === 0)
+        if (!usuario)
             return res.sendError(404, "Not found")
 
         return res.sendMessage(usuario)

@@ -134,13 +134,13 @@ Luego sigue solamente estos pasos:
 
 ## Iniciando el proyecto
 
-Debemos inicializar un proyecto utilizando npm, instalar dependencias y crear el archivo **index.js**, en la terminal que tenemos abierta ejecutar lo siguiente:
+Debemos inicializar un proyecto utilizando npm, instalar dependencias y crear los archivos **db.sql** **db.js** **index.js**, en la terminal que tenemos abierta ejecutar lo siguiente:
 
 ```bash
 npm init -y
 npm install express mysql
 npm install nodemon -D
-touch index.js
+touch db.sql db.js index.js
 ```
 
 Modificar el archivo **package.json**, agregar la linea **"start"** y **"dev"**
@@ -198,9 +198,9 @@ La contraseña es tu nombre de usuario. e.j: mi nombre de usuario es "**srealmor
 
 ### Crear base de datos y usuario en mysql
 
-Debemos crear un script sql, para eso vamos a crear un nuevo fichero llamado 'db.sql'
+Debemos crear un script sql que contenga las instrucciones para crear nuestra base de datos y nuestro usuario
 
-En este tutorial crearemos una base de datos de usuarios, copia y pega el siguiente código en 'db.sql'
+En este tutorial crearemos una base de datos de usuarios, agrega el siguiente código al archivo **db.sql**
 
 ```sql
 -- Crear base de datos solo si no existe llamada 'express_api'
@@ -276,7 +276,7 @@ Ahora debemos cambiar la base de datos activa:
 
 ### Módulo de mysql
 
-Vamos a crear un nuevo archivo llamado **db.js** con el siguiente código:
+agrega el siguiente código al archivo **db.js**:
 
 ```javascript
 const { promisify } = require("util")
@@ -306,7 +306,7 @@ module.exports = pool
 
 ## Index.js
 
-El archivo index.js es nuestro archivo principal, en este declaramos nuestra API. crea un archivo llamado **index.js** y sigue los siguientes pasos:
+El archivo index.js es nuestro archivo principal, en este declaramos nuestra API. abre el archivo **index.js** y sigue los siguientes pasos:
 
 ---
 
@@ -673,7 +673,7 @@ npm start
 
 ![Abrir terminal integrada](assets/open_integrated_terminal.gif)
 
-Si deseamos que nuestro servidor se reinicie automáticamente cada vez que modifiquemos cualquier fichero del proyecto ejecutamos
+Si deseamos que nuestro servidor se reinicie automáticamente cada vez que modifiquemos cualquier archivo del proyecto ejecutamos
 
 ```bash
 npm run dev

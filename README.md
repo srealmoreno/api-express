@@ -126,11 +126,13 @@ npm install -D
 
 Luego sigue solamente estos pasos:
 
-- [Crear conexión mysql en vscode](#crear-conexión-mysql-en-vscode)
-- [Ejecutar script sql](#ejecutar-script-sql)
-- [Poner en marcha nuestro servidor](#poner-en-marcha-nuestro-servidor)
-- [Importar Tests Thunder en vscode](#colección-completa-de-thunder-client) (puedes encontrar el archivo en '**tests/thunder_test.json**')
-- [Ejecución de Test](#ejecución-de-pruebas)
+[Ir a rama finished](https://github.com/srealmoreno/api-express/tree/finished)
+
+- [Crear conexión mysql en vscode](https://github.com/srealmoreno/api-express/tree/finished#crear-conexión-mysql-en-vscode)
+- [Ejecutar script sql](https://github.com/srealmoreno/api-express/tree/finished#ejecutar-script-sql)
+- [Poner en marcha nuestro servidor](https://github.com/srealmoreno/api-express/tree/finished#poner-en-marcha-nuestro-servidor)
+- [Importar Tests Thunder en vscode](https://github.com/srealmoreno/api-express/tree/finished#colección-completa-de-thunder-client) (puedes encontrar el archivo en '**tests/thunder_test.json**')
+- [Ejecución de Test](https://github.com/srealmoreno/api-express/tree/finished#ejecución-de-pruebas)
 
 ## Iniciando el proyecto
 
@@ -491,7 +493,7 @@ app.get("/api/usuarios/:id", async (req, res) => {
             "SELECT * FROM usuarios WHERE id = ?", [req.params.id]
         )
 
-        if (!usuario)
+        if (usuario ===  undefined)
             return res.sendError(404, "Not found")
 
         return res.sendMessage(usuario)

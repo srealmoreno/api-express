@@ -1057,7 +1057,11 @@ app.get("/api/usuarios/:id", async (req, res) => {
             "SELECT * FROM usuarios WHERE id = ?", [req.params.id]
         )
 
+<<<<<<< HEAD
         if (usuario.length === 0)
+=======
+        if (usuario ==  undefined)
+>>>>>>> 9c23d34... Mejorando tutorial
             return res.sendError(404, "Not found")
 
         return res.sendMessage(usuario)

@@ -81,7 +81,7 @@ app.get("/api/usuarios/:id", async (req, res) => {
             "SELECT * FROM usuarios WHERE id = ?", [req.params.id]
         )
 
-        if (!usuario)
+        if (usuario === undefined)
             return res.sendError(404, "Not found")
 
         return res.sendMessage(usuario)

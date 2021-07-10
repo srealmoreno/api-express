@@ -77,7 +77,7 @@ chmod +x build/build.sh
 
 sudo build/build.sh
 
-npm install -D
+npm install
 
 code .
 ```

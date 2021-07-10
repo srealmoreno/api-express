@@ -676,12 +676,16 @@ Si esa variable es **igual a _0_**, quiere decir que **no existe** ningún regis
 
 ### 6. Poner en escucha el servidor
 
-Debemos de indicarle al servidor que este en modo listening en el puerto y dirección ip declarada en el paso 1
+Debemos de indicarle al servidor que este en modo listening en el puerto y dirección ip declarada en el paso 1 y además cuando llegue una ruta desconocida, enviará el el código 404 not found
 
 Agrega el siguiente código al archivo **index.js**
 
 ```javascript
-app.listen(PORT, IP, ()=> console.log(`Listening in http://${IP}:${PORT}`))
+app.use((req, res) => {
+    res.sendError(404, "Not found, " + req.path)
+})
+
+app.listen(PORT, IP, () => console.log(`Listening in http://${IP}:${PORT}`))
 ```
 
 ---

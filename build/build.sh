@@ -114,7 +114,7 @@ start_mysql() {
 			docker run --name "$DOCKER_NAME" --restart unless-stopped \
 				--env MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" \
 				--publish "${IP}:${PORT}:3306" --detach mysql:$IMAGE_VERSION \
-				--volume /var/lib/mysql:/var/lib/mysql >/dev/null
+				>/dev/null
 
 			if [ $? -eq 0 ]; then
 				success "Serivicio iniciado"

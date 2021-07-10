@@ -2,6 +2,7 @@ const { promisify } = require("util")
 const { createPool } = require("mysql")
 
 const credenciales = {
+  port: 3306,
   host: "127.0.0.1",
   user: "express_api",
   password: "express_api",

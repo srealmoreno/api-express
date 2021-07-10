@@ -114,7 +114,7 @@ start_mysql() {
 			docker run --name "$DOCKER_NAME" --restart unless-stopped \
 				--env MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" \
 				--publish "${IP}:${PORT}:3306" --detach mysql:$IMAGE_VERSION \
-				--volume /var/lib/mysql:/var/lib/mysql >/dev/null
+				>/dev/null
 
 			if [ $? -eq 0 ]; then
 				success "Serivicio iniciado"
@@ -326,10 +326,10 @@ chage_ip_and_port() {
 		PORT=$TMP_PORT
 		tee -a "$DB_FILE" <<-EOF
 			 Utilice esa dirección IP y número puerto en esta
-			 parte del tutorial:
+			 parte del tutorial (Mysql):
+			 ${u}${c4}https://github.com/srealmoreno/api-express/tree/master#añadir-variables-de-entorno${n}
 			 ${u}${c4}https://github.com/srealmoreno/api-express/tree/master#crear-conexión-mysql-en-vscode${n}
 			 ${u}${c4}https://github.com/srealmoreno/api-express/tree/master#utilizar-base-de-datos-creada${n}
-			 ${u}${c4}https://github.com/srealmoreno/api-express/tree/master#módulo-de-mysql${n}
 		EOF
 	else
 		tput cuu 2

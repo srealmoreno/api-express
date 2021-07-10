@@ -1,10 +1,11 @@
+require('dotenv').config()
 const express = require("express")
 const database = require("./db.js")
 const { urlencoded, json } = express
 const app = express()
 
-const IP = "127.0.0.1"
-const PORT = 3000
+const IP = process.env.NODE_IP
+const PORT = process.env.NODE_PORT
 
 app.use(urlencoded({ extended: false }))
 app.use(json())

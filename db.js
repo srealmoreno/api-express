@@ -2,11 +2,11 @@ const { promisify } = require("util")
 const { createPool } = require("mysql")
 
 const credenciales = {
-  port: 3306,
-  host: "127.0.0.1",
-  user: "express_api",
-  password: "express_api",
-  database: "express_api"
+  port: process.env.MYSQL_PORT,
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 }
 
 const pool = createPool(credenciales)

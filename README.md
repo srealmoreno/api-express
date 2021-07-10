@@ -13,6 +13,7 @@ Por razones de entendimiento algunas cosas muy puntuales las dejaré en inglés 
   - [Instalación](#instalación-de-dependencias)
   - [Extensiones de vscode](#instalar-extensiones-en-vscode)
 - [Iniciando el proyecto](#iniciando-el-proyecto)
+- [Añadir variables de entorno](#añadir-variables-de-entorno)
 - [Mysql](#mysql)
   - [Crear conexión mysql en vscode](#crear-conexión-mysql-en-vscode)
   - [Crear base de datos](#crear-base-de-datos-y-usuario-en-mysql)
@@ -121,7 +122,7 @@ Si deseas ahorrarte la creación del código fuente del proyecto, ejecuta esto e
 ```bash
 git checkout finished
 
-npm install -D
+npm install
 ```
 
 Luego sigue solamente estos pasos:
@@ -136,13 +137,14 @@ Luego sigue solamente estos pasos:
 
 ## Iniciando el proyecto
 
-Debemos inicializar un proyecto utilizando npm, instalar dependencias y crear los archivos **db.sql** **db.js** **index.js**, en la terminal que tenemos abierta ejecutar lo siguiente:
+Debemos inicializar un proyecto utilizando npm, instalar dependencias y crear los archivos **db.sql** **db.js** **index.js** **.env**, en la terminal que tenemos abierta ejecutar lo siguiente:
 
 ```bash
 npm init -y
-npm install express mysql
-npm install nodemon -D
-touch db.sql db.js index.js
+npm install express mysql dotenv -E
+npm install nodemon -E -D
+touch db.sql db.js index.js .env
+code .
 ```
 
 Modificar el archivo **package.json**, agregar la linea **"start"** y **"dev"**
@@ -153,6 +155,32 @@ Modificar el archivo **package.json**, agregar la linea **"start"** y **"dev"**
     "dev": "nodemon node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
 }
+```
+
+---
+
+## Añadir variables de entorno
+
+Debemos definir algunas variables de entorno que necesitará nuestro proyecto, agrega el siguiente código en el archivo **.env**
+
+```env
+NODE_PORT=3000
+NODE_IP=127.0.0.1
+
+MYSQL_PORT=3306
+MYSQL_HOST=127.0.0.1
+MYSQL_USER=express_api
+MYSQL_PASSWORD=express_api
+MYSQL_DATABASE=express_api
+```
+
+Para poder obtener las variables debemos importar el módulo 'dotenv' en el archivo principal del proyecto (index.js) y accedemos a ellas escribiendo "process.env." antes del nombre de la variable, e.j
+
+```javascript
+require('dotenv').config()
+
+const IP = process.env.NODE_IP
+const PORT = process.env.NODE_PORT
 ```
 
 ---
@@ -285,10 +313,11 @@ const { promisify } = require("util")
 const { createPool } = require("mysql")
 
 const credenciales = {
-  host: "127.0.0.1",
-  user: "express_api",
-  password: "express_api",
-  database: "express_api"
+  port: process.env.MYSQL_PORT,
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 }
 
 const pool = createPool(credenciales)
@@ -301,6 +330,7 @@ module.exports = pool
 > Algunas dudas que quizás tengas:  
 > [¿Por qué las variables se declaran con <kbd>{}</kbd>?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#desestructuración)  
 > [¿Qué significa **pool.queryPromisify** en el código?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#añadir-nuevo-método-a-un-objeto)  
+> [¿Qué significa **process.env**?](#añadir-variables-de-entorno)  
 > [¿Qué es **promisify** en Nodejs?](https://medium.com/@suyashmohan/util-promisify-in-node-js-v8-d07ef4ea8c53)  
 > [¿Cúal es la diferencia entre utilizar un pool y una conexión a la base de datos?](https://es.stackoverflow.com/questions/359715/cu%C3%A1l-ser%C3%ADa-la-diferencia-entre-usar-un-pool-o-usar-una-conexion-tradicional-a-l)
 
@@ -321,13 +351,14 @@ El archivo index.js es nuestro archivo principal, en este declaramos nuestra API
 Agrega el siguiente código al archivo **index.js**
 
 ```javascript
+require('dotenv').config()
 const express = require("express")
 const database = require("./db.js")
 const { urlencoded, json } = express
 const app = express()
 
-const IP = "127.0.0.1"
-const PORT = 3000
+const IP = process.env.NODE_IP
+const PORT = process.env.NODE_PORT
 
 app.use(urlencoded({ extended: false }))
 app.use(json())
@@ -335,6 +366,7 @@ app.use(json())
 
 > Algunas dudas que quizás tengas:  
 > [¿Por qué las variables se declaran con <kbd>{}</kbd>?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#desestructuración)  
+> [¿Qué significa **process.env**?](#añadir-variables-de-entorno)  
 > [¿Que significa **urlencoded()** y **json()**?](https://github.com/srealmoreno/api-express/wiki/Conocimientos-preliminares#insert-set)
 
 ---

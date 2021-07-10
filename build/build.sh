@@ -326,10 +326,10 @@ chage_ip_and_port() {
 		PORT=$TMP_PORT
 		tee -a "$DB_FILE" <<-EOF
 			 Utilice esa dirección IP y número puerto en esta
-			 parte del tutorial:
+			 parte del tutorial (Mysql):
+			 ${u}${c4}https://github.com/srealmoreno/api-express/tree/master#añadir-variables-de-entorno${n}
 			 ${u}${c4}https://github.com/srealmoreno/api-express/tree/master#crear-conexión-mysql-en-vscode${n}
 			 ${u}${c4}https://github.com/srealmoreno/api-express/tree/master#utilizar-base-de-datos-creada${n}
-			 ${u}${c4}https://github.com/srealmoreno/api-express/tree/master#módulo-de-mysql${n}
 		EOF
 	else
 		tput cuu 2

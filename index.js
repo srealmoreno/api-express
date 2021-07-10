@@ -167,4 +167,8 @@ app.delete("/api/usuarios/:id", async (req, res) => {
     }
 })
 
-app.listen(PORT, IP, ()=> console.log(`Listening in http://${IP}:${PORT}`))
+app.use((req, res) => {
+    res.sendError(404, "Not found, " + req.path)
+})
+
+app.listen(PORT, IP, () => console.log(`Listening in http://${IP}:${PORT}`))

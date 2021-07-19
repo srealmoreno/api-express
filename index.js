@@ -4,8 +4,7 @@ const database = require("./db.js")
 const { urlencoded, json } = express
 const app = express()
 
-const IP = process.env.NODE_IP
-const PORT = process.env.NODE_PORT
+const { NODE_IP: IP, NODE_PORT: PORT } = process.env
 
 app.use(urlencoded({ extended: false }))
 app.use(json())

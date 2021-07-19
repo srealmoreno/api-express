@@ -166,6 +166,19 @@ var { nombre, edad } = usuario
 console.log(nombre, edad) // Salvador 22
 ```
 
+Si deseamos cambiar el nombre de la variable en la asignación debemos especificar el nuevo nombre anteponiendo <kbd>:</kbd>
+
+```javascript
+var usuario = {
+  nombre: "Salvador",
+  edad: 22,
+}
+
+var { nombre:n } = usuario
+
+console.log(n) // Salvador
+```
+
 Es importante escribir el nombre de la propiedad correctamente respetando las mayúsculas y minúsculas.
 
 ```javascript
@@ -486,7 +499,7 @@ JSON está constituído por dos estructuras:
 
 1. Una colección de pares de nombre/valor. En varios lenguajes esto es conocido como un objeto, registro estructura, diccionario, tabla hash, lista de claves o un arreglo asociativo.
 
-2. Una lista ordenada de valores. En la mayoría de los lenguajes, esto se implementa como arreglos, vectores, listas o sequencias.
+2. Una lista ordenada de valores. En la mayoría de los lenguajes, esto se implementa como arreglos, vectores, listas o secuencias.
 
 Estas son estructuras universales virtualmente todos los lenguajes de programación las soportan de una forma u otra. Es razonable que un formato de intercambio de datos que es independiente del lenguaje de programación se base en estas estructuras.
 
@@ -532,7 +545,7 @@ Un arreglo comienza con <kbd>[</kbd> y termina con <kbd>]</kbd> Los valores se s
 
 ### JsonApi
 
-Siguiendo el estandar de [JsonApi](https://jsonapi.org/) y tomando de ejemplo la api de [Facebook](https://developers.facebook.com/docs/graph-api/using-graph-api/error-handling/) nuestros mensajes tendrán 2 estructuras principales:
+Siguiendo el estándar de [JsonApi](https://jsonapi.org/) y tomando de ejemplo la api de [Facebook](https://developers.facebook.com/docs/graph-api/using-graph-api/error-handling/) nuestros mensajes tendrán 2 estructuras principales:
 
 - En caso de **éxito** el formato json será el siguiente
 
